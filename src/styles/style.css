@@ -14,39 +14,60 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Quicksand', sans-serif;
-	background-color: #f5f5f5;
+	background-color: #ffffff;
 }
 
 main {
-	padding: 73px 5px;
+	padding: 0 5px;
 }
 
 header {
 	width: 100%;
 	background-color: white /*#313131*/;
-	position: fixed;
-	padding: 17px 17px 7px 21px;
-	border-bottom: 1px solid;
+	padding: 18px 6px 7px 10px;
+	text-align: center;
+	/* border-bottom: 1px solid;
 	border-color: rgb(0,0,0);
-	border-color: rgba(0,0,0,0.2);
+	border-color: rgba(0,0,0,0.2); */
+	
 
 	/* -webkit-box-shadow: 0 2px 7px 0 #313131;
   -moz-box-shadow: 0 2px 7px 0 #313131;
   box-shadow: 0 2px 7px 0 #313131; */
 }
 
+.notes-app__title {
+	font-family: 'Roboto', sans-serif;
+	font-size: 21px;
+	color: #bbb2dd;
+	text-decoration: none;
+}
+
 nav {
-	display: inline;
+	display: flex;
+	margin-top: 30px;
 }
 
 nav a {
 	text-decoration: inline;
-	color: #313131;
+	/* color: #9a8cc6; */
+	color: #8f8f8f;
+	font-size: 30px;
+	margin: 5px;
 }
 
-.notes-app__title {
-	font-family: 'Roboto', sans-serif;
-	font-size: 21px;
+.notes-app__nav-left {
+	flex-basis: 20%;
+	text-align: left;
+}
+
+.notes-app__nav-left a {
+	font-size: 34px;
+}
+
+.notes-app__nav-right {
+	flex-basis: 80%;
+	text-align: right;
 }
 
 .notes-app__archive {
@@ -55,18 +76,32 @@ nav a {
 }
 
 .search-bar {
-	padding: 15px;
-	margin: 35px 0 30px 0;
+	padding: 12px;
+	margin: 10px 0;
 }
 
 input {
 	width: 100%;
-	margin: 0;
-	padding: 14px;
-	border-radius: 10px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 18px 25px;
+	border-radius: 25px;
 	border: 1px solid;
-	border-color: rgb(0,0,0);
-	border-color: rgba(0,0,0,0.5);
+	border-color: #c3bae4;
+	font-size: 17px;
+	background-color: #f9f7fd;
+	color: #a497ce;
+}
+
+::-webkit-input-placeholder,
+::placeholder {
+	color: #a497ce;
+}
+
+input:focus {
+	outline: none !important;
+	border: 1px solid;
+	border-color: #9e93c5;
 }
 
 .note-list_title {
@@ -75,27 +110,68 @@ input {
 }
 
 .note-item {
-	margin: 15px;
+	margin: 38px 15px;
 	padding: 20px 20px 10px 20px;
-	border: 1px solid;
-	border-color: rgb(0,0,0);
-	border-color: rgba(0,0,0,0.6);
-	border-radius: 15px;
-	background-color: white;
+	border-radius: 25px;
+	background-color: #fccdf5;
+	
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.22);
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+	/* background: rgb(164, 151, 206);
+	background: linear-gradient(
+		0deg,
+		rgba(255, 199, 248, 1) 0%,
+		rgba(164, 151, 206, 1) 100%
+	); */
+}
+
+.note-item:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.note-item p {
+	margin: 12px 0;
 }
 
 .note-item__title {
-	color: black;
+	color: #6d477a;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.note-item__body {
 	font-size: 18px;
+	font-weight: bold;
+	color: #cb85c2;
+}
+
+.note-item__action {
+	display: flex;
 }
 
 .note-item__date {
 	font-size: 14px;
-	color: rgb(56, 56, 56);
+	color: #bd7cbc;
+	font-weight: bold;
+	flex-basis: 80%;
 }
 
-.note-item__body {
-	font-size: 15px;
+.note-item__action-btn {
+	flex-basis: 20%;
+	font-size: 38px;
+}
+
+.note-item__action button {
+	border: none;
+	background: none;
+	color: #917c94;
+}
+
+.note-item__action button:focus {
+	color: #764c7a;
+	transition: 0.3s;
 }
 
 .note-input {
@@ -145,19 +221,19 @@ input {
 
 .action-button button {
 	position: fixed;
-	bottom: 15px;
-	right: 15px;
-	border-radius: 100px;
-	border: 1px solid #525252;
-	background-color: #525252;
-	color: white;
-	padding: 11px 10px 1px 10px;
-	font-size: 35px;
+	bottom: 0;
+	right: 0;
+	border-radius: 30px 0 0 0;
+	border: 1px solid #ad98d6;
+	background-color: #ad98d6;
+	color: #fbf7ff;
+	padding: 12px 10px 1px 11px;
+	font-size: 38px;
 	cursor: pointer;
 	z-index: 1;
-	-webkit-box-shadow: 0 8px 6px -6px #424242;
-  -moz-box-shadow: 0 8px 6px -6px #424242;
-  box-shadow: 0 8px 6px -6px #424242;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn-archive {

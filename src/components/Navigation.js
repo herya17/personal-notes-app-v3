@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdOutlineArchive } from "react-icons/md";
+import { MdHomeFilled, MdOutlineArchive, MdOutlineDarkMode, MdTranslate, MdOutlineLogout } from "react-icons/md";
 
 function Navigation() {
   return (
+    <>
+    <Link className='notes-app__title' to='/'>My Notes</Link>
     <nav>
-      <Link className='notes-app__title' to='/'>Notes App</Link>
-      <Link className='notes-app__archive' to='/archived'><MdOutlineArchive /></Link>
+      <div className='notes-app__nav-left'>
+        <Link className='' to='/archived'><MdOutlineArchive /></Link>
+      </div>
+      <div className='notes-app__nav-right'>
+        <Link className='' to='/'><MdOutlineDarkMode /></Link>
+        <Link className='' to='/'><MdTranslate /></Link>
+        <Link className='' to='/archived'><MdOutlineLogout /></Link>
+      </div>
     </nav>
+    </>
   );
 }
 

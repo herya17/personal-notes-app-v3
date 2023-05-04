@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdOutlineSearch } from "react-icons/md";
 
 function SearchBar({ keyword, keywordChange }) {
   return (
@@ -7,7 +8,7 @@ function SearchBar({ keyword, keywordChange }) {
       <input
         className='input'
         type='text'
-        placeholder='Search title'
+        placeholder='Search notes'
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)} />
     </div>

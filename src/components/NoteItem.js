@@ -2,6 +2,7 @@ import React from 'react';
 import { showFormattedDate } from '../utils/showFormattedDate';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { MdOutlineArchive } from "react-icons/md";
 
 function NoteItem({ id, title, createdAt, body }) {
   let description = body;
@@ -12,8 +13,11 @@ function NoteItem({ id, title, createdAt, body }) {
   return (
     <div className='note-item'>
       <Link className='note-item__title' to={`/notes/${id}`}>{title}</Link>
-      <p className='note-item__date'>{showFormattedDate(createdAt)}</p>
       <p className='note-item__body'>{description}</p>
+      <div className='note-item__action'>
+        <p className='note-item__date'>{showFormattedDate(createdAt)}</p>
+        <button className='note-item__action-btn'><MdOutlineArchive /></button>
+      </div>
     </div>
   );
 }
