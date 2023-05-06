@@ -5,7 +5,7 @@ function ActionButton({ id, icon, type, onDelete, onArchive, onUnarchive }) {
 
   if (type === 'delete') {
     return (
-      <div className='action-button'>
+      <div className='action-button btn-delete'>
         <button className='red' type={type} onClick={() => onDelete(id)}>
           {icon}
         </button>

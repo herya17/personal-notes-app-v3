@@ -5,15 +5,15 @@ import { MdHomeFilled, MdOutlineArchive, MdOutlineDarkMode, MdTranslate, MdOutli
 function Navigation() {
   return (
     <>
-    <Link className='notes-app__title' to='/'>My Notes</Link>
+    <Link className='notes-app__title' to='/'>Catatan Untukmu</Link>
     <nav>
       <div className='notes-app__nav-left'>
         <Link className='' to='/archived'><MdOutlineArchive /></Link>
       </div>
       <div className='notes-app__nav-right'>
-        <Link className='' to='/'><MdOutlineDarkMode /></Link>
-        <Link className='' to='/'><MdTranslate /></Link>
-        <Link className='' to='/archived'><MdOutlineLogout /></Link>
+        <button className=''><MdOutlineDarkMode /></button>
+        <button className=''><MdTranslate /></button>
+        <button className=''><MdOutlineLogout /></button>
       </div>
     </nav>
     </>

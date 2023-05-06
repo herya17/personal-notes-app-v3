@@ -4,9 +4,9 @@ import { showFormattedDate } from '../utils/showFormattedDate';
 import ActionButton from '../components/ActionButton';
 import { MdDeleteOutline, MdOutlineArchive, MdOutlineUnarchive } from 'react-icons/md';
 
-function NoteDetail({ id, title, createdAt, body, archived, onDelete, onArchive, onUnarchive }) {
+function NoteDetail({ id, title, createdAt, body, archived, color, onDelete, onArchive, onUnarchive }) {
   return (
-    <div className='note-detail'>
+    <div className={`note-detail`}>
       <p className='note-detail__title'>{title}</p>
       <p className='note-detail__date'>{showFormattedDate(createdAt)}</p>
       <p className='note-detail__body'>{body}</p>

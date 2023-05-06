@@ -38,7 +38,6 @@ class ArchivedPage extends React.Component {
     return (
       <section>
         <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
-        <p className='note-list_title'>Note archive</p>
         {
           notes.length > 0
           ? <NoteList notes={notes} />
