@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LocaleContext from '../contexts/LocaleContext';
 import { MdOutlineSearch } from "react-icons/md";
 
 function SearchBar({ keyword, keywordChange }) {
+  const { locale } = React.useContext(LocaleContext);
+
   return (
     <div className='search-bar'>
       <input
         className='input'
         type='text'
-        placeholder='Search notes'
+        placeholder={locale === 'id' ? 'Cari catatan' : 'Search notes'}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)} />
     </div>

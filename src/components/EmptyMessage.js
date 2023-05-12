@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MdOutlineSentimentVeryDissatisfied } from "react-icons/md";
+import { MdOutlineSentimentDissatisfied, MdOutlineSentimentVeryDissatisfied } from "react-icons/md";
 
-function EmptyMessage({ message }) {
+function EmptyMessage({ message, isNoPage }) {
   return (
     <div className='empty-message'>
-      <MdOutlineSentimentVeryDissatisfied className='empty-message__icon' />
+      {
+        isNoPage
+          ? <MdOutlineSentimentVeryDissatisfied className='empty-message__icon' />
+          : <MdOutlineSentimentDissatisfied className='empty-message__icon' />
+      }
       <p>{message}</p>
     </div>
   );
@@ -13,6 +17,7 @@ function EmptyMessage({ message }) {
 
 EmptyMessage.propTypes = {
   message: PropTypes.string.isRequired,
+  isNoPage: PropTypes.bool,
 }
 
 export default EmptyMessage;

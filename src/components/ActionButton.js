@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ActionButton({ id, icon, type, onDelete, onArchive, onUnarchive }) {
-
   if (type === 'delete') {
     return (
       <div className='action-button btn-delete'>

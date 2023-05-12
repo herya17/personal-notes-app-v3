@@ -1,88 +1,85 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import NoteDetail from '../components/NoteDetail';
 import EmptyMessage from '../components/EmptyMessage';
-import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/local-data';
+import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/network-data';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-class DetailPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: getNote(props.id)
-    }
-  }
-
-  render() {
-    if (this.state.notes === undefined || this.state.notes === null) {
-      return <EmptyMessage message='Note is not found!' />;
-    }
-
-    return (
-      <section>
-        <NoteDetail 
-          onDelete={this.props.onDelete} 
-          onArchive={this.props.onArchive}
-          onUnarchive={this.props.onUnarchive}
-          {...this.state.notes} />
-      </section>
-    );
-  }
-}
-
-function DetailPageWrapper() {
+function DetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [notes, setNotes] = React.useState([]);
 
-  function onDeleteNoteHandler(id) {
+  React.useEffect(() => {
+    const getData = async (id) => {
+      const { data } = await getNote(id);
+      setNotes(data);
+    }
+
+    getData(id);
+  }, [id]);
+
+  const onDeleteNoteHandler = async (id) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Kamu yakin ingin hapus kenangan ini?',
+      text: "Kamu bisa batalin lohh kalo kamu masih peduli!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#28a745',
+      confirmButtonText: 'Gak peduli',
+      cancelButtonText: 'Aku masih peduli',
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        deleteNote(id);
+        await deleteNote(id);
         navigate('/');
         Swal.fire({
           icon: 'success',
-          title: 'Your note has been deleted.',
+          title: 'Kenangan sudah terhapus, jangan sedih aku selalu disisimu!',
           showConfirmButton: false,
-          timer: 1300
+          timer: 4000,
         });
       }
     });
   }
 
-  function onArchiveNoteHandler(id) {
-    archiveNote(id);
+  const onArchiveNoteHandler = async (id) => {
+    await archiveNote(id);
+    toast.success('1 difavoritkan', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
     navigate('/');
   }
 
-  function onUnarchiveNoteHandler(id) {
-    unarchiveNote(id);
+  const onUnarchiveNoteHandler = async (id) => {
+    await unarchiveNote(id);
     navigate('/archived');
   }
 
+  if (notes === undefined || notes === null) {
+    return <EmptyMessage message='Note is not found!' />;
+  }
+
   return (
-    <DetailPage
-      id={id}
-      onDelete={onDeleteNoteHandler}
-      onArchive={onArchiveNoteHandler} 
-      onUnarchive={onUnarchiveNoteHandler} />
+    <section>
+      <NoteDetail 
+        onDelete={onDeleteNoteHandler} 
+        onArchive={onArchiveNoteHandler}
+        onUnarchive={onUnarchiveNoteHandler}
+        {...notes} />
+    </section>
   );
 }
 
-DetailPage.propTypes = {
-  id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
-  onUnarchive: PropTypes.func.isRequired,
-}
+export default DetailPage;
 
-export default DetailPageWrapper;

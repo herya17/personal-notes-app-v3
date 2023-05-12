@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { showFormattedDate } from '../utils/showFormattedDate';
 import ActionButton from '../components/ActionButton';
-import { MdDeleteOutline, MdOutlineArchive, MdOutlineUnarchive } from 'react-icons/md';
+import { MdDeleteOutline, MdFavoriteBorder, MdHeartBroken } from 'react-icons/md';
 
 function NoteDetail({ id, title, createdAt, body, archived, color, onDelete, onArchive, onUnarchive }) {
   return (
@@ -13,19 +13,19 @@ function NoteDetail({ id, title, createdAt, body, archived, color, onDelete, onA
       <ActionButton icon={<MdDeleteOutline />} id={id} type='delete' onDelete={onDelete} />
       {
         archived
-          ? <ActionButton icon={<MdOutlineUnarchive />} id={id} type='unarchive' onUnarchive={onUnarchive} />
-          : <ActionButton icon={<MdOutlineArchive />} id={id} type='archive' onArchive={onArchive} />
+          ? <ActionButton icon={<MdHeartBroken />} id={id} type='unarchive' onUnarchive={onUnarchive} />
+          : <ActionButton icon={<MdFavoriteBorder />} id={id} type='archive' onArchive={onArchive} />
       }
     </div>
   );
 }
 
 NoteDetail.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  archived: PropTypes.bool.isRequired,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  createdAt: PropTypes.string,
+  body: PropTypes.string,
+  archived: PropTypes.bool,
   onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired,
   onUnarchive: PropTypes.func.isRequired,

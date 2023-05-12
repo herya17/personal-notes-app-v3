@@ -4,68 +4,74 @@ import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
 import EmptyMessage from '../components/EmptyMessage';
 import ActionButton from '../components/ActionButton';
-import { getActiveNotes } from '../utils/local-data';
+import { getActiveNotes } from '../utils/network-data';
 import { Link, useSearchParams } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LocaleContext from '../contexts/LocaleContext';
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
+function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [notes, setNotes] = React.useState([]);
+  const [keyword, setKeyword] = React.useState(() => {
+    return searchParams.get('keyword') || '';
+  });
+  const { locale } = React.useContext(LocaleContext);
 
-    this.state = {
-      notes: getActiveNotes(),
-      keyword: props.defaultKeyword || '',
+  React.useEffect(() => {
+    const getData = async () => {
+      const { data } = await getActiveNotes();
+      setNotes(data);
     }
 
-    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
-  }
+    getData();
 
-  onKeywordChangeHandler(keyword) {
-    this.setState(() => {
-      return {
-        keyword: keyword,
-      }
-    });
+    return () => {
+      setNotes(null);
+    }
+  }, []);
 
-    this.props.keywordChange(keyword);
-  }
-
-  render() {
-    const notes = this.state.notes.filter((note) => (
-      note.title.toLocaleLowerCase().includes(this.state.keyword.toLocaleLowerCase())
-    ));
-
-    return (
-      <section>
-        <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
-        {
-          notes.length > 0
-          ? <NoteList notes={notes} />
-          : <EmptyMessage message="Empty active note, could not find" />
-        }
-        <Link to='/add'>
-          <ActionButton icon={<MdAdd />} />
-        </Link>
-      </section>
-    );
-  }
-}
-
-function HomePageWrapper() {
-  const [ searchParams, setSearchParams ] = useSearchParams();
-
-  const keyword = searchParams.get('keyword');
-
-  function changeSearchParams(keyword) {
+  const onKeywordChangeHandler = (keyword) => {
+    setKeyword(keyword);
     setSearchParams({ keyword });
   }
 
-  return <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />;
+  const filteredNotes = notes.filter((note) => (
+    note.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
+  ));
+
+  if (notes === null) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <section>
+      <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+        {
+          filteredNotes.length > 0
+            ? <NoteList notes={filteredNotes} />
+            : <EmptyMessage 
+                message={locale === 'id' 
+                  ? 'Catatan aktif kosong, tidak dapat ditemukan!' 
+                  : 'Empty active note, could not be found!'} />
+        }
+        <ToastContainer
+          position='bottom-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme='light' />
+        <Link to='/add'>
+          <ActionButton icon={<MdAdd />} />
+        </Link>
+    </section>
+  );
 }
 
-HomePage.propTypes = {
-  defaultKeyword: PropTypes.string,
-  keywordChange: PropTypes.func.isRequired,
-}
-
-export default HomePageWrapper;
+export default HomePage;

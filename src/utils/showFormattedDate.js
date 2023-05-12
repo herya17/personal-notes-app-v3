@@ -1,4 +1,8 @@
 const showFormattedDate = (date) => {
+  if (date == undefined) {
+    return null;
+  }
+
   const options = {
     weekday: 'long',
     year: 'numeric',

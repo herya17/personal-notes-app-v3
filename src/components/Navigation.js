@@ -1,22 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdHomeFilled, MdOutlineArchive, MdOutlineDarkMode, MdTranslate, MdOutlineLogout } from "react-icons/md";
+import LocaleContext from '../contexts/LocaleContext';
+import { MdOutlineDarkMode, MdTranslate, MdOutlineGTranslate, MdOutlineLogout, MdFavoriteBorder, } from 'react-icons/md';
+import { TbHome } from 'react-icons/tb';
 
-function Navigation() {
+function Navigation({ logout, name }) {
+  const path = window.location.pathname;
+  const { locale, toggleLocale } = React.useContext(LocaleContext);
+
   return (
-    <>
-    <Link className='notes-app__title' to='/'>Catatan Untukmu</Link>
-    <nav>
-      <div className='notes-app__nav-left'>
-        <Link className='' to='/archived'><MdOutlineArchive /></Link>
-      </div>
-      <div className='notes-app__nav-right'>
-        <button className=''><MdOutlineDarkMode /></button>
-        <button className=''><MdTranslate /></button>
-        <button className=''><MdOutlineLogout /></button>
-      </div>
-    </nav>
-    </>
+    <div className='note-app__nav'>
+      <p className='notes-app__title'>Catatan Untukmu</p>
+      <nav>
+        <div className='notes-app__nav-left'>
+        {
+          path === '/'
+          ? <Link className='' to='/archived'><MdFavoriteBorder /></Link>
+          : <Link className='' to='/'><TbHome /></Link>
+        }
+        </div>
+        <div className='notes-app__nav-right'>
+          <button className=''><MdOutlineDarkMode /></button>
+          <button onClick={toggleLocale}>{locale === 'id' ? <MdTranslate /> : <MdOutlineGTranslate />}</button>
+          <button onClick={logout}><MdOutlineLogout /></button>
+        </div>
+      </nav>
+    </div>
   );
 }
 
