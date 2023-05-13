@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -65,7 +66,8 @@ header {
 }
 
 .bold {
-	font-weight: 600;
+	font-family: 'Pacifico', cursive !important;
+	font-size: 23px !important;
 	color: #ad98d6 !important;
 }
 
@@ -230,6 +232,7 @@ header {
 }
 
 .heart-msg p {
+	/* font-family: 'Pacifico', cursive; */
 	font-size: 12px;
 	margin: 20px 0 35px 0;
 	text-align: center;
@@ -273,12 +276,13 @@ header {
 
 .note-app__nav {
 	background-color: white /*#313131*/;
-	padding: 15px 6px 7px 10px;
+	padding: 5px 6px 7px 10px;
 	text-align: center;
 }
 
 .notes-app__title {
-	font-family: 'Roboto', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
+	font-family: 'Pacifico', cursive;
 	font-size: 21px;
 	color: #bbb2dd;
 	text-align: center;
@@ -287,7 +291,7 @@ header {
 
 nav {
 	display: flex;
-	margin-top: 30px;
+	margin-top: 26px;
 }
 
 nav button {
