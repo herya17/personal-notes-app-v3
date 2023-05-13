@@ -10,7 +10,7 @@ function Navigation({ logout, name }) {
 
   return (
     <div className='note-app__nav'>
-      <p className='notes-app__title'>Catatan Untukmu</p>
+      <p className='notes-app__title'>{locale === 'id' ? 'Hey Catatan!!' : 'HeyCa!!'}</p>
       <nav>
         <div className='notes-app__nav-left'>
         {
@@ -20,8 +20,8 @@ function Navigation({ logout, name }) {
         }
         </div>
         <div className='notes-app__nav-right'>
-          <button className=''><MdOutlineDarkMode /></button>
           <button onClick={toggleLocale}>{locale === 'id' ? <MdTranslate /> : <MdOutlineGTranslate />}</button>
+          <button className=''><MdOutlineDarkMode /></button>
           <button onClick={logout}><MdOutlineLogout /></button>
         </div>
       </nav>

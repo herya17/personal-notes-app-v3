@@ -71,7 +71,7 @@ function App() {
         navigate('/');
         Swal.fire({
           icon: 'success',
-          title: 'Aku kecewa sama kamu!',
+          title: 'HeyCa!! Selalu MenantiMu!',
           text: "Aku akan selalu ada untukmu dan selalu merindukanmu!",
           showConfirmButton: true,
         });
@@ -85,12 +85,14 @@ function App() {
 
   if (authedUser === null) {
     return (
-      <Routes>
-        <Route path='/' element={<FirstPage />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/login' element={<LoginPage loginSuccess={onLoginSuccess} />} />
-        <Route path='*' element={<NoPage />} />
-      </Routes>
+      <LocaleContext.Provider value={localeContextValue}>
+        <Routes>
+          <Route path='/' element={<FirstPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/login' element={<LoginPage loginSuccess={onLoginSuccess} />} />
+          <Route path='*' element={<NoPage />} />
+        </Routes>
+      </LocaleContext.Provider>
     );
   }
 

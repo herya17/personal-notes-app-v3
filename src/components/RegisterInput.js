@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import LocaleContext from '../contexts/LocaleContext';
 
 function RegisterInput({ register }) {
   const [name, handleNameChange] = useInput('');
@@ -8,6 +9,7 @@ function RegisterInput({ register }) {
   const [password, handlePasswordChange] = useInput('');
   const [confirmPassword, handleConfirmPasswordChange] = useInput('');
   const [checkConfirmPassword, setCheckConfirmPassword] = React.useState('');
+  const { locale } = React.useContext(LocaleContext);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -33,7 +35,7 @@ function RegisterInput({ register }) {
 
   return (
     <form onSubmit={onSubmitHandler} className='register-input'>
-      <input type='text' placeholder='Nama' value={name} onChange={handleNameChange} required />
+      <input type='text' placeholder={locale === 'id' ? 'Nama' : 'Name'} value={name} onChange={handleNameChange} required />
       <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} required />
       <input 
         type='password' 
@@ -45,7 +47,7 @@ function RegisterInput({ register }) {
       <input 
         className={`confirm-password ${checkConfirmPassword}`}
         type='password' 
-        placeholder='Konfirmasi Password' 
+        placeholder={locale === 'id' ? 'Konfirmasi Password' : 'Confirm Password'} 
         autoComplete='current-password' 
         value={confirmPassword} 
         onChange={handleConfirmPasswordChange}
@@ -54,7 +56,7 @@ function RegisterInput({ register }) {
         onInput={onInputConfirmPasswordHandler}
         minLength='6'
         required />
-      <button>Daftar</button>
+      <button>{locale === 'id' ? 'Daftar' : 'Register'}</button>
     </form>
   );
 }

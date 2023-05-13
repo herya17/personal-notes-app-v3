@@ -19,6 +19,14 @@
 		margin: 6px;
 	}
 
+	.translate-btn__first-page {
+		position: fixed;
+		top: 25px;
+		right: 23px;
+		text-align: right;
+		margin-top: 5px;
+	}
+
 	.note-list {
 		display: grid;
 		grid-template-columns: 1fr 1fr;

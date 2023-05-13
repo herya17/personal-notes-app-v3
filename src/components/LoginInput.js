@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import LocaleContext from '../contexts/LocaleContext';
 
 function LoginInput({ login }) {
   const [email, handleEmailChange] = useInput('');
   const [password, handlePasswordChange] = useInput('');
+  const { locale } = React.useContext(LocaleContext);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ function LoginInput({ login }) {
         onChange={handlePasswordChange} 
         minLength='6' 
         required />
-        <button>Masuk</button>
+        <button>{locale === 'id' ? 'Masuk' : 'Login'}</button>
     </form>
   );
 }

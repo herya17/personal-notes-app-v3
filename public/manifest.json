@@ -1,6 +1,6 @@
 {
-  "short_name": "Camu",
-  "name": "Catatan Kamu",
+  "short_name": "HeyCa!!",
+  "name": "HeyCa!!",
   "icons": [
     {
       "src": "images/favicon/icon.png",
@@ -19,7 +19,7 @@
     }
   ],
   "start_url": "/",
-  "description": "Camu - Catatan Kamu, Everyone has a story to tell.",
+  "description": "HeyCa!! - Hey Catatan Kamu, Tuliskan kenangan manis pahitmu tanpa batas, aku akan selalu ada untuk menemanimu.",
   "orientation": "portrait",
   "display": "standalone",
   "theme_color": "#ffffff",
